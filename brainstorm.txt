@@ -1,0 +1,30 @@
+estruturas
+  labirinto, lista de mapas/labirintospre preenchido
+  mapa vai ter formato de grid, grade de celulas
+    modelar colisoes entre objetos
+  
+    o mapa sera representado por uma matriz numerada,
+      cada numero indica um objeto/entidade do mapa
+    
+    funcao para vigiar `eventos` no mapa, stream/eventos do jogo, subfuncao
+itens
+  fruta cresce
+  portal
+  bomba
+eventos
+  colisao entre cobras
+2 jogadores
+  teclado
+  muda tamanho +-
+  skins
+classes
+ cobra
+  nome
+  corpo de blocos
+    set ou dict
+
+  crescer()
+  diminuir()
+  mover()
+    automatico ou teclando?
+  morrer()
