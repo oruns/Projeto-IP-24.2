@@ -2,18 +2,19 @@ import pygame as pg
 
 # Colocar dados em arquivo separado
 class Jogador:
-    def __init__(self, altura_tela, largura_tela, coord_inicial, cor, teclas, velocidade):
+    def __init__(self, altura_tela, largura_tela, coord_inicial, cor, teclas, velocidade_cobra):
         self.receber_dados_tela(altura_tela, largura_tela)
-
-        self.cor = cor
-        self.corpo = [self.inicio]
-        self.crescer = False
-
-        self.teclas = teclas
+        self.receber_dados_movimento(coord_inicial, teclas, velocidade_cobra)
+        self.montar_corpo(cor, coord_inicial)
 
         self.pontuacao = 0
-
     
+    
+    def montar_corpo(self, cor, coord_inicial):
+        self.cor = cor
+        self.corpo = [self.coord_inicial]
+        self.crescer = False
+
 
     def receber_dados_tela(self, altura_tela, largura_tela):
         '''
@@ -23,13 +24,14 @@ class Jogador:
         self.largura_tela = largura_tela
     
 
-    def receber_dados_movimento(self, coord_inicial, velocidade):
+    def receber_dados_movimento(self, coord_inicial, teclas, velocidade_cobra):
         '''
         Receber dados relativos ao movimento dos jogadores
         '''
         self.direcao = (0, 0) # Começa parado
-        self.velocidade = velocidade
+        self.velocidade = velocidade_cobra
         self.coord_inicial = coord_inicial
+        self.teclas = teclas
 
 
     def update(self, keys, buff_1):
