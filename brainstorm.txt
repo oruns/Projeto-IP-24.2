@@ -18,13 +18,13 @@ eventos
   muda tamanho +-
   skins
 classes
- cobra
-  nome
-  corpo de blocos
-    set ou dict
+  cobra
+    nome
+    corpo de blocos
+      set ou dict
 
-  crescer()
-  diminuir()
-  mover()
-    automatico ou teclando?
-  morrer()
+    crescer()
+    diminuir()
+    mover()
+      automatico ou teclando?
+    morrer()

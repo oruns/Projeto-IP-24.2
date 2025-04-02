@@ -2,10 +2,25 @@ import pygame as pg
 import random as rd
 
 
+from json import load
+
+
 from jogador import Jogador
 
 
+# diretorio melhor maneira?
+# Abrindo JSON
+dir_tela_config = "../../config/tela.json" 
+with open(dir_tela_config, "r", encoding="utf-8") as arq:
+    dados = load(arq)
+
+# Recebendo dados do JSON
+largura_tela = dados['largura']
+altura_tela = dados['altura']
+
+
 pg.init()
+game_logo = pg.image.load('logo.jpg')
 
 
 # Configurações da tela
