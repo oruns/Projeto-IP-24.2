@@ -20,8 +20,6 @@ altura_tela = dados['altura']
 
 
 pg.init()
-game_logo = pg.image.load('logo.jpg')
-
 
 # Configurações da tela
 largura_tela_tela, altura_tela_tela = 920, 800

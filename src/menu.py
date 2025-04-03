@@ -1,10 +1,31 @@
 import pygame
 import importlib
+import os
 import tkinter as tk
 from tkinter import messagebox
+from json import load
 
-# Importa o módulo de configurações
-import config as g  
+#Setando configuraçoes de DIR
+dir_cores_config = "../config/cores.json" 
+dir_tela_config = "../config/tela.json" 
+dir_imgs_config = "../imgs/" 
+
+with open(dir_tela_config, "r", encoding="utf-8") as arq:
+    dados = load(arq)
+# Acessando os valores
+largura = dados["largura"]
+altura = dados["altura"]
+
+with open(dir_cores_config, "r", encoding="utf-8") as arq:
+    dados = load(arq)
+
+# Definição das cores 
+WHITE = dados["branco"]
+BLACK = dados["preto"]
+GRAY = dados["cinza"]
+DARK_GRAY = dados["cinza_escuro"]
+GREEN = dados["verde"]
+HOVER_COLOR = dados["cor_mouse"]
 
 # Inicializa o Pygame
 pygame.init()
@@ -17,16 +38,8 @@ def show_popup(text):
     root.destroy()
 
 # Configurações da tela do jogo
-screen = pygame.display.set_mode((g.largura, g.altura))
-pygame.display.set_caption(f"{g.NOME_DO_JOGO}")
-
-# Definição das cores (extraídas do config)
-WHITE = g.WHITE
-BLACK = g.BLACK
-GRAY = g.GRAY
-DARK_GRAY = g.DARK_GRAY
-GREEN = g.GREEN
-HOVER_COLOR = g.HOVER_COLOR  # Cor para hover
+screen = pygame.display.set_mode((largura, altura))
+pygame.display.set_caption("cobra_game")
 
 # Define a fonte para o texto nos botões
 font = pygame.font.Font(None, 50)
@@ -36,14 +49,14 @@ button_width, button_height = 250, 60
 spacing = 20
 
 # Posições dos botões
-y_start = g.altura // 2 - (2 * (button_height + spacing) // 2)
+y_start = altura // 2 - (2 * (button_height + spacing) // 2)
 
 # Posições da logo (logo acima dos botões)
 logo_height = 200  
 logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
 
 buttons = [
-    pygame.Rect((g.largura // 2 - button_width // 2, y_start + i * (button_height + spacing)),
+    pygame.Rect((largura // 2 - button_width // 2, y_start + i * (button_height + spacing)),
                 (button_width, button_height))
     for i in range(4)
 ]
@@ -55,8 +68,9 @@ selected_index = 0
 redraw = True  # Só redesenha quando necessário
 
 # Carregar logo
-logo = g.game_logo
-logo = pygame.transform.scale(logo, (250, logo_height))  # Ajusta o tamanho da logo
+logo_path = dir_imgs_config +"logo.jpg"
+logo = pygame.image.load(logo_path)
+logo = pygame.transform.scale(logo, (250, logo_height))  
 
 # Função para desenhar os botões
 def draw_button(button, text, color):
@@ -72,7 +86,7 @@ def draw_menu():
         screen.fill(GREEN)
 
         # Desenhar a logo no topo
-        screen.blit(logo, (g.largura // 2 - logo.get_width() // 2, logo_y_pos))
+        screen.blit(logo, (largura // 2 - logo.get_width() // 2, logo_y_pos))
 
         mouse_pos = pygame.mouse.get_pos()
 
