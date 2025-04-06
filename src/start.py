@@ -1,7 +1,12 @@
 import pygame as pg
 
+from jogadorfim import Jogador
+from coletaveis import Buff_1
+from coletaveis import Debuff
+from coletaveis import Coroas
 
 from config import *
+#possíveis novas adições
 
 
 # Iniciando a tela do jogo
