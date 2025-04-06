@@ -2,7 +2,7 @@ import pygame as pg
 
 
 #tamanho cobra constantes
-# Colocar dados em arquivo separado
+#Colocar dados em arquivo separado
 class Jogador:
     def __init__(self, altura_tela, largura_tela, coord_inicial, cor, teclas_direcoes, velocidade_cobra):
         self.receber_dados_tela(altura_tela, largura_tela)
@@ -82,8 +82,8 @@ class Jogador:
         if nova_parte in corpo[1:]:
             self.resetar()
             return
-        if pg.Rect(nova_parte[0], nova_parte[1], tamanho_cobras, tamanho_cobras).colliderect(
-                pg.Rect(buff_1.x, buff_1.y, tamanho_cobras, tamanho_cobras)):
+        if pg.Rect(nova_parte[0], nova_parte[1], tamanho_inicial_cobra, tamanho_inicial_cobra).colliderect(
+                pg.Rect(buff_1.x, buff_1.y, tamanho_inicial_cobra, tamanho_inicial_cobra)):
             self.pontuacao += 10
             self.crescer = True
             buff_1.reposicionar()
@@ -97,7 +97,7 @@ class Jogador:
 
     def desenhar(self):
         for segment in self.corpo:
-            pg.draw.rect(screen, self.cor, (segment[0], segment[1], tamanho_cobras, tamanho_cobras))
+            pg.draw.rect(screen, self.cor, (segment[0], segment[1], tamanho_inicial_cobra, tamanho_inicial_cobra))
 
     def resetar(self):
         self.corpo = [self.inicio]

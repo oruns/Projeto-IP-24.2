@@ -1,0 +1,6 @@
+{
+    "tamanho_inicial_cobra": 20,
+    "velocidade_cobra": 20,
+    "jogador_1_coordenada_inicial": [20, 20],
+    "jogador_2_coordenada_inicial": [880, 20]
+}
