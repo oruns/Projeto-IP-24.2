@@ -8,17 +8,22 @@ from json import load
 DIR_CONFIG = './config/'
 
 
-def carregar_dados(tipo, dir_config):
+def carregar_dados(tipo):
     '''
     Carregar os dados de um arquivo de configuracao
     Tipo = tela, cores
     '''
+    dir_config = DIR_CONFIG
+
+
     if tipo == 'tela':
         dir_config += "tela.json" 
     elif tipo == 'cores':
         dir_config += "cores.json" 
     elif tipo == 'entidades':
         dir_config += "entidades.json" 
+    elif tipo == 'diretorios_projeto':
+        dir_config += "diretorios.json" 
     
 
     with open(dir_config, "r", encoding="utf-8") as arq:

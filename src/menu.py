@@ -1,63 +1,56 @@
 import pygame
+
+
 import importlib
 import os
 import tkinter as tk
 from tkinter import messagebox
 from json import load
 
-#Setando configuraçoes de DIR
-dir_cores_config = "../config/cores.json" 
-dir_tela_config = "../config/tela.json" 
-dir_imgs_config = "../imgs/" 
 
-with open(dir_tela_config, "r", encoding="utf-8") as arq:
-    dados = load(arq)
-# Acessando os valores
-largura = dados["largura"]
-altura = dados["altura"]
+from config import *
 
-with open(dir_cores_config, "r", encoding="utf-8") as arq:
-    dados = load(arq)
-
-# Definição das cores 
-WHITE = dados["branco"]
-BLACK = dados["preto"]
-GRAY = dados["cinza"]
-DARK_GRAY = dados["cinza_escuro"]
-GREEN = dados["verde"]
-HOVER_COLOR = dados["cor_mouse"]
 
 # Inicializa o Pygame
-pygame.init()
+# pygame.init()
+
 
 def show_popup(text):
-    #Exibe um popup usando Tkinter
+    # Exibe um popup usando Tkinter
     root = tk.Tk()
     root.withdraw()  # Esconde a janela principal do Tkinter
+
+
     messagebox.showinfo("Erro", text)
     root.destroy()
 
+
 # Configurações da tela do jogo
-screen = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("cobra_game")
+tela = pygame.display.set_mode((largura_tela, altura_tela))
+pygame.display.set_caption(titulo_menu)
+
 
 # Define a fonte para o texto nos botões
 font = pygame.font.Font(None, 50)
 
+
 # Tamanho dos botões e espaçamento
-button_width, button_height = 250, 60
-spacing = 20
+botao_altura = tamanho_x_botao_menu
+botao_largura = tamanho_y_botao_menu
+
 
 # Posições dos botões
-y_start = altura // 2 - (2 * (button_height + spacing) // 2)
+y_start = altura_tela // 2 - (2 * (botao_altura + espacamento_menu) // 2)
+
 
 # Posições da logo (logo acima dos botões)
 logo_height = 200  
 logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
 
+
 buttons = [
-    pygame.Rect((largura // 2 - button_width // 2, y_start + i * (button_height + spacing)),
-                (button_width, button_height))
+    pygame.Rect((largura_tela // 2 - botao_largura // 2, y_start + i * (botao_altura + espacamento_menu)),
+                (botao_largura, botao_altura))
     for i in range(4)
 ]
 button_texts = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
@@ -74,19 +67,19 @@ logo = pygame.transform.scale(logo, (250, logo_height))
 
 # Função para desenhar os botões
 def draw_button(button, text, color):
-    pygame.draw.rect(screen, color, button, border_radius=10)
+    pygame.draw.rect(tela, color, button, border_radius=10)
     text_render = font.render(text, True, BLACK)
     text_rect = text_render.get_rect(center=button.center)
-    screen.blit(text_render, text_rect)
+    tela.blit(text_render, text_rect)
 
 # Função para desenhar o menu 
 def draw_menu():
     global redraw
     if redraw:
-        screen.fill(GREEN)
+        tela.fill(GREEN)
 
         # Desenhar a logo no topo
-        screen.blit(logo, (largura // 2 - logo.get_width() // 2, logo_y_pos))
+        tela.blit(logo, (largura_tela // 2 - logo.get_width() // 2, logo_y_pos))
 
         mouse_pos = pygame.mouse.get_pos()
 

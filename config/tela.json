@@ -1,5 +1,9 @@
 {
     "largura": 920,
     "altura": 800,
-    "titulo": "Jogo da Cobrinha-nome generico"
+    "tamanho_x_botao_menu": 250,
+    "tamanho_y_botao_menu": 60,
+    "espacamento_menu": 20,
+    "titulo_jogo": "Jogo da Cobrinha-nome generico",
+    "titulo_menu": ""
 }
