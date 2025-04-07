@@ -3,7 +3,7 @@ import random as rd
 
 pg.init()
 # configurações da tela
-largura, altura = 920, 800
+largura, altura = 920, 819
 screen = pg.display.set_mode((largura, altura))
 pg.display.set_caption("Jogo da Cobrinha com Labirinto")
 tamanho_cobras = 20
@@ -120,7 +120,7 @@ class Mapa:
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
 
     def desenha_labirinto(self, tela):
@@ -428,24 +428,24 @@ while running:
     coroa_texto_2_ = font.render(
         f"{jogador_2.contador_coroas}", True, (255, 255, 255))
 
-    screen.blit(pontos_texto_1, (200, 0))
+    screen.blit(pontos_texto_1, (0, 800))
     screen.blit(pontos_texto_2, (largura -
-                pontos_texto_2.get_width() - 200, 0))
+                pontos_texto_2.get_width() - 0, 800))
 
-    screen.blit(buff_texto_1, (100, 780))
-    screen.blit(buff_texto_2, (largura - pontos_texto_2.get_width() - 250, 780))
+    screen.blit(buff_texto_1, (100, 800))
+    screen.blit(buff_texto_2, (largura - pontos_texto_2.get_width() - 80, 800))
 
-    screen.blit(veneno_texto_1, (280, 780))
+    screen.blit(veneno_texto_1, (180, 800))
     screen.blit(veneno_texto_2, (largura -
-                veneno_texto_2.get_width() - 85, 780))
+                veneno_texto_2.get_width() - 180, 800))
 
-    screen.blit(coroa_texto_1, (1, 370))
-    screen.blit(coroa_texto_1_, (5, 390))
+    screen.blit(coroa_texto_1, (300, 800))
+    screen.blit(coroa_texto_1_, (330, 800))
 
     screen.blit(coroa_texto_2, (largura -
-                veneno_texto_2.get_width() - -67, 370))
+                veneno_texto_2.get_width() - 250, 800))
     screen.blit(coroa_texto_2_, (largura -
-                veneno_texto_2.get_width() - -75, 390))
+                veneno_texto_2.get_width() - 220, 800))
 
     pg.display.flip()
 
