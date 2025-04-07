@@ -28,3 +28,7 @@ classes
     mover()
       automatico ou teclando?
     morrer()
+
+TODO
+# Falta fechar a janela
+# Fatorar em funcoes e classes e outros

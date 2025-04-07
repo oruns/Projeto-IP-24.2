@@ -21,5 +21,5 @@ dados_entidades = carregar_dados('entidades', DIR_CONFIG)
 # Recebendo dados das cobras
 tamanho_inicial_cobra = dados_entidades['tamanho_inicial_cobra']
 velocidade = dados_entidades['velocidade_cobra']
-jog_1_coord_inic = dados_entidades['jogador_1_coordenada_inicial']
-jog_2_coord_inic = dados_entidades['jogador_2_coordenada_inicial']
+jog_1_coord_inic = dados_entidades['jogador_1_coord_inicial']
+jog_2_coord_inic = dados_entidades['jogador_2_coord_inicial']

@@ -5,25 +5,25 @@ import pygame as pg
 #Colocar dados em arquivo separado
 class Jogador:
     def __init__(self, cor, controles, coord_inicial, velocidade):
-        self.receber_dados_movimento(coord_inicial, controles, velocidade)
-        self.montar_corpo(cor)
+        self.receber_dados_movimento(controles, velocidade)
+        self.montar_corpo(cor, coord_inicial)
 
         self.pontuacao = 0
     
     
-    def montar_corpo(self, cor):
+    def montar_corpo(self, cor, coord_inicial):
+        self.coord_inicial = coord_inicial
         self.cor = cor
         self.corpo = [self.coord_inicial]
         self.crescer = False
 
 
-    def receber_dados_movimento(self, coord_inicial, controles, velocidade):
+    def receber_dados_movimento(self, controles, velocidade):
         '''
         Receber dados relativos ao movimento dos jogadores
         '''
         self.direcao_atual = (0, 0) # Começa parado
         self.velocidade = velocidade
-        self.coord_inicial = coord_inicial
         self.controles = controles
 
 
@@ -66,7 +66,7 @@ class Jogador:
 
         corpo = self.corpo
         direcao_atual = self.direcao_atual
-        direcao_atual = self.direcao_atual
+        coord_inicial = self.coord_inicial
         velocidade = self.velocidade
 
         
@@ -79,7 +79,7 @@ class Jogador:
             # Falta comentar
             nova_parte = (corpo[0][0] + direcao_atual[0], corpo[0][1] + direcao_atual[1])
         else:
-            nova_parte = direcao_atual
+            nova_parte = coord_inicial
 
 
         # Se a cobrar sair da tela, recomecar jogo
@@ -95,7 +95,7 @@ class Jogador:
                 pg.Rect(buff_1.x, buff_1.y, velocidade, velocidade)):
             self.pontuacao += 10
             self.crescer = True
-            buff_1.reposicionar()
+            buff_1.reposicionar(altura_tela, largura_tela, velocidade)
 
         corpo.insert(0, nova_parte)
 
@@ -114,8 +114,8 @@ class Jogador:
 
 
     def resetar(self):
-        self.corpo = [self.inicio]
-        self.direcao = (0, 0)
+        self.corpo = [self.coord_inicial]
+        self.direcao_atual = (0, 0)
         self.crescer = False
         self.pontuacao = 0
         pg.time.delay(500)
