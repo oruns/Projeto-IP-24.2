@@ -1,7 +1,7 @@
 import pygame as pg
 
 
-from config_geral import carregar_dados, DIR_CONFIG
+from .config_geral import carregar_dados, DIR_CONFIG
 
 
 # Controles para as cobras
@@ -20,6 +20,6 @@ dados_entidades = carregar_dados('entidades', DIR_CONFIG)
 
 # Recebendo dados das cobras
 tamanho_inicial_cobra = dados_entidades['tamanho_inicial_cobra']
-velocidade_cobra = dados_entidades['velocidade_cobra']
+velocidade = dados_entidades['velocidade_cobra']
 jog_1_coord_inic = dados_entidades['jogador_1_coordenada_inicial']
 jog_2_coord_inic = dados_entidades['jogador_2_coordenada_inicial']

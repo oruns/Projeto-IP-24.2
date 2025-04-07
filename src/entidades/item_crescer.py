@@ -9,15 +9,18 @@ class ItemCrescer:
     Item que faz as cobras crescerem
     '''
 
-    def __init__(self):
-        self.reposicionar()
+    def __init__(self, dados_tela, velocidade):
+        altura_tela = dados_tela['altura']
+        largura_tela = dados_tela['largura']
+
+        self.reposicionar(altura_tela, largura_tela, velocidade)
         self.cor = (128, 0, 128)  # buff 1 é o bloco roxo
 
 
-    def reposicionar(self, altura_tela, largura_tela, tamanho_cobras):
-        self.x = randint(0, (largura_tela - tamanho_cobras) // tamanho_cobras) * tamanho_cobras
-        self.y = randint(0, (altura_tela - tamanho_cobras) // tamanho_cobras) * tamanho_cobras
+    def reposicionar(self, altura_tela, largura_tela, velocidade):
+        self.x = randint(0, (largura_tela - velocidade) // velocidade) * velocidade
+        self.y = randint(0, (altura_tela - velocidade) // velocidade) * velocidade
 
 
-    def desenhar_buff1(self):
-        pg.draw.rect(screen, self.cor, (self.x, self.y, tamanho_cobras, tamanho_cobras))
+    def desenhar_buff1(self, tela, velocidade):
+        pg.draw.rect(tela, self.cor, (self.x, self.y, velocidade, velocidade))
