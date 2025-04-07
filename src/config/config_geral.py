@@ -6,6 +6,8 @@ from json import load
 
 # Diretorio com as configuracoes
 DIR_CONFIG = './config/'
+# Se der errado acima, use:
+# DIR_CONFIG = '../../config/'
 
 
 def carregar_dados(tipo):
