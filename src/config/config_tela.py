@@ -1,17 +1,37 @@
+import pygame as pg
+
+
 from .config_geral import carregar_dados, DIR_CONFIG
 
 
 # Carregando dados
-dados_tela = carregar_dados('tela', DIR_CONFIG)
+dados_tela = carregar_dados('tela')
+
 
 # Recebendo da tela
-largura_tela = dados_tela['largura']
-altura_tela = dados_tela['altura']
+BOTAO_MENU_LARGURA = dados_tela['botao_menu_largura']
+BOTAO_MENU_ALTURA = dados_tela['botao_menu_altura']
 
-titulo_janela = dados_tela['titulo_jogo']
-titulo_menu = dados_tela['titulo_menu']
+ESPACAMENTO_MENU = dados_tela['espacamento_menu']
 
-tamanho_x_botao_menu = dados_tela['tamanho_x_botao_menu']
-tamanho_y_botao_menu = dados_tela['tamanho_y_botao_menu']
+LARGURA_TELA = dados_tela['largura']
+ALTURA_TELA = dados_tela['altura']
 
-espacamento_menu = dados_tela['espacamento_menu']
+TITULO_JOGO = dados_tela['titulo_jogo']
+TITULO_MENU = dados_tela['titulo_menu']
+
+TEXTOS_BOTOES_MENU = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
+
+
+### Constantes
+Y_START_BTN = ALTURA_TELA // 2 - (2 * (BOTAO_MENU_ALTURA + ESPACAMENTO_MENU) // 2)
+
+#confuso
+LOGO_MENU_ALTURA = 200  
+LOGO_Y = Y_START_BTN - LOGO_MENU_ALTURA - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
+
+
+### Objetos do pygame
+
+# Define a fonte para o texto nos botões
+FONT_MENU = pg.font.Font(None, 50)

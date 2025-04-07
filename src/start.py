@@ -1,5 +1,6 @@
 import pygame as pg
 
+pg.init()
 
 from config import *
 from entidades import *
@@ -9,7 +10,7 @@ from gerenciamento import inicializacao as inc
 from gerenciamento import gerenciadores as grc
 
 
-tela = inc.iniciar_janela_jogo(titulo_janela, altura_tela, largura_tela)
+tela = inc.iniciar_janela_jogo(TITULO_JOGO, ALTURA_TELA, LARGURA_TELA)
 
 # Criando entidades
 coords_iniciais = {
@@ -34,7 +35,7 @@ grc.iniciar_loop(
     dados_tela,
     jogador_1, jogador_2,
     grade, item_crescer,
-    largura_tela, tela,
+    LARGURA_TELA, tela,
     velocidade
 )
 

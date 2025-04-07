@@ -15,7 +15,7 @@ CONTROLE_SETAS= {
 
 
 # Carregando dados
-dados_entidades = carregar_dados('entidades', DIR_CONFIG)
+dados_entidades = carregar_dados('entidades')
 
 
 # Recebendo dados das cobras

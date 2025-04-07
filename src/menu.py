@@ -1,4 +1,4 @@
-import pygame
+import pygame as pg
 
 
 import importlib
@@ -11,10 +11,6 @@ from json import load
 from config import *
 
 
-# Inicializa o Pygame
-# pygame.init()
-
-
 def show_popup(text):
     # Exibe um popup usando Tkinter
     root = tk.Tk()
@@ -25,49 +21,38 @@ def show_popup(text):
     root.destroy()
 
 
-# Configurações da tela do jogo
-tela = pygame.display.set_mode((largura_tela, altura_tela))
-pygame.display.set_caption(titulo_menu)
+def inicializar_menu():
+    # Configurações da tela do jogo
+    tela = pg.display.set_mode((LARGURA_TELA, ALTURA_TELA))
+    pg.display.set_caption(TITULO_MENU)
 
 
-# Define a fonte para o texto nos botões
-font = pygame.font.Font(None, 50)
+
+botao_multiplayer = pg.Rect((LARGURA_TELA // 2 - BOTAO_MENU_ALTURA // 2, Y_START_BTN + i * (BOTAO_MENU_ALTURA + ESPACAMENTO_MENU)),
+                (BOTAO_MENU_ALTURA, BOTAO_MENU_ALTURA))
 
 
-# Tamanho dos botões e espaçamento
-botao_altura = tamanho_x_botao_menu
-botao_largura = tamanho_y_botao_menu
-
-
-# Posições dos botões
-y_start = altura_tela // 2 - (2 * (botao_altura + espacamento_menu) // 2)
-
-
-# Posições da logo (logo acima dos botões)
-logo_height = 200  
-logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
-
-
+#for escondido, gerou todos os botoes?
 buttons = [
-    pygame.Rect((largura_tela // 2 - botao_largura // 2, y_start + i * (botao_altura + espacamento_menu)),
-                (botao_largura, botao_altura))
-    for i in range(4)
+    botao_multiplayer,
 ]
-button_texts = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
+
 
 # Variáveis para controle de entrada e redesenho
 using_mouse = False
 selected_index = 0  
 redraw = True  # Só redesenha quando necessário
 
+
 # Carregar logo
-logo_path = dir_imgs_config +"logo.jpg"
-logo = pygame.image.load(logo_path)
-logo = pygame.transform.scale(logo, (250, logo_height))  
+DIR_LOGO_MENU = dir_imgs + "logo.jpg"
+LOGO = pg.image.load(DIR_LOGO_MENU)
+LOGO = pg.transform.scale(LOGO, (250, LOGO_MENU_ALTURA))  
+
 
 # Função para desenhar os botões
 def draw_button(button, text, color):
-    pygame.draw.rect(tela, color, button, border_radius=10)
+    pg.draw.rect(tela, color, button, border_radius=10)
     text_render = font.render(text, True, BLACK)
     text_rect = text_render.get_rect(center=button.center)
     tela.blit(text_render, text_rect)
@@ -79,15 +64,15 @@ def draw_menu():
         tela.fill(GREEN)
 
         # Desenhar a logo no topo
-        tela.blit(logo, (largura_tela // 2 - logo.get_width() // 2, logo_y_pos))
+        tela.blit(logo, (LARGURA_TELA // 2 - logo.get_width() // 2, logo_y_pos))
 
-        mouse_pos = pygame.mouse.get_pos()
+        mouse_pos = pg.mouse.get_pos()
 
         for i, button in enumerate(buttons):
             color = HOVER_COLOR if (using_mouse and button.collidepoint(mouse_pos)) or (not using_mouse and i == selected_index) else GRAY
             draw_button(button, button_texts[i], color)
 
-        pygame.display.flip()
+        pg.display.flip()
         redraw = False  # Evita redesenho desnecessário
 
 # Função para carregar e executar um módulo
@@ -112,11 +97,11 @@ running = True
 while running:
     draw_menu()  # Apenas redesenha se necessário
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
             running = False  
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        elif event.type == pg.MOUSEBUTTONDOWN:
             using_mouse = True
             for i, button in enumerate(buttons):  # Verifica todos os botões
                 if button.collidepoint(event.pos):
@@ -130,19 +115,19 @@ while running:
                         running = False  
                     redraw = True
 
-        elif event.type == pygame.MOUSEMOTION:
+        elif event.type == pg.MOUSEMOTION:
             using_mouse = True
             redraw = True  
 
-        elif event.type == pygame.KEYDOWN:
+        elif event.type == pg.KEYDOWN:
             using_mouse = False
-            if event.key in (pygame.K_UP, pygame.K_w):
+            if event.key in (pg.K_UP, pg.K_w):
                 selected_index = (selected_index - 1) % len(buttons)
                 redraw = True
-            elif event.key in (pygame.K_DOWN, pygame.K_s):
+            elif event.key in (pg.K_DOWN, pg.K_s):
                 selected_index = (selected_index + 1) % len(buttons)
                 redraw = True
-            elif event.key == pygame.K_RETURN:
+            elif event.key == pg.K_RETURN:
                 if selected_index == 0:
                     carregar_modulo("singleplayer")
                 elif selected_index == 1:
@@ -153,5 +138,5 @@ while running:
                     running = False  
                 redraw = True
 
-# Encerra o Pygame
-pygame.quit()
+# Encerra o pygame
+pg.quit()
