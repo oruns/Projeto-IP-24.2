@@ -1,4 +1,5 @@
 import pygame as pg
+<<<<<<< HEAD
 import random as rd
 
 
@@ -126,3 +127,17 @@ while running:
     pg.display.flip()
 
 pg.quit()
+=======
+
+from config import carregar_dados
+
+from item_crescer import ItemCrescer
+from jogador import Jogador
+
+
+
+# excecoes
+# Colocar dados em arquivo separado
+# diretorio melhor maneira?
+# Abrindo JSON
+>>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd

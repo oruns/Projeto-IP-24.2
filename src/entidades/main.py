@@ -20,6 +20,8 @@ snake_head_img = pg.image.load("imgs/snake_head.png")
 snake_head_img = pg.transform.scale(snake_head_img, (30, 30))
 snake_body_img = pg.image.load("imgs/snake_body.png")
 snake_body_img = pg.transform.scale(snake_body_img, (30, 30))
+plano_img = pg.image.load("imgs/plano.png")
+plano_img = pg.transform.scale(plano_img, (30, 30))
 pos_coroa = (300, 300)
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
@@ -125,13 +127,10 @@ class Mapa:
         for y, linha in enumerate(self.labirinto):
             for x, celula in enumerate(linha):
                 if celula == 1:
-                    pg.draw.rect(
-                        tela, AZUL,
-                        (x * self.tamanho_cobras, y * self.tamanho_cobras, self.tamanho_cobras, self.tamanho_cobras))
+                    screen.blit(bush_img,(x * self.tamanho_cobras, y * self.tamanho_cobras, self.tamanho_cobras, self.tamanho_cobras))
                 elif celula==0:
-                    pg.draw.rect(
-                        tela, BEGE,
-                        (x * self.tamanho_cobras, y * self.tamanho_cobras, self.tamanho_cobras, self.tamanho_cobras))
+                    screen.blit(plano_img,(x * self.tamanho_cobras, y * self.tamanho_cobras, self.tamanho_cobras, self.tamanho_cobras))
+
                     
 
     def parede(self, x, y):
