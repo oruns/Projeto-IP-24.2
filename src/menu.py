@@ -1,227 +1,173 @@
 import pygame
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
 import importlib
 import os
 import tkinter as tk
 from tkinter import messagebox
 from json import load
-
-<<<<<<< HEAD
-#Setando configuraçoes de DIR
-dir_cores_config = "../config/cores.json" 
-dir_tela_config = "../config/tela.json" 
-dir_imgs_config = "../imgs/" 
-
-with open(dir_tela_config, "r", encoding="utf-8") as arq:
-    dados = load(arq)
-# Acessando os valores
-largura = dados["largura"]
-altura = dados["altura"]
-
-with open(dir_cores_config, "r", encoding="utf-8") as arq:
-    dados = load(arq)
-
-# Definição das cores 
-WHITE = dados["branco"]
-BLACK = dados["preto"]
-GRAY = dados["cinza"]
-DARK_GRAY = dados["cinza_escuro"]
-GREEN = dados["verde"]
-HOVER_COLOR = dados["cor_mouse"]
+from config import *
 
 # Inicializa o Pygame
 pygame.init()
+pygame.mixer.init()
 
 def show_popup(text):
-    #Exibe um popup usando Tkinter
     root = tk.Tk()
-    root.withdraw()  # Esconde a janela principal do Tkinter
+    root.withdraw()
     messagebox.showinfo("Erro", text)
     root.destroy()
-
-# Configurações da tela do jogo
-screen = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("cobra_game")
-=======
-
-from config import *
-
-
-# Inicializa o Pygame
-# pygame.init()
-
-
-def show_popup(text):
-    # Exibe um popup usando Tkinter
-    root = tk.Tk()
-    root.withdraw()  # Esconde a janela principal do Tkinter
-
-
-    messagebox.showinfo("Erro", text)
-    root.destroy()
-
 
 # Configurações da tela do jogo
 tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption(titulo_menu)
 
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
+font_path = pygame.font.match_font('comicsansms')  # Ou adicione uma TTF customizada
+font = pygame.font.Font(font_path, 36)
 
-# Define a fonte para o texto nos botões
-font = pygame.font.Font(None, 50)
+hover_sound_path = os.path.join("assets", "hover_sound.wav")
+click_sound_path = os.path.join("assets", "mouse_click.wav")
+hover_sound = pygame.mixer.Sound(hover_sound_path) if os.path.exists(hover_sound_path) else None
+click_sound = pygame.mixer.Sound(click_sound_path) if os.path.exists(click_sound_path) else None
 
-<<<<<<< HEAD
-# Tamanho dos botões e espaçamento
-button_width, button_height = 250, 60
-spacing = 20
+fundo_path = os.path.join("assets", "fundo_menu.png")
+fundo = pygame.image.load(fundo_path) if os.path.exists(fundo_path) else None
+fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela)) if fundo else None
 
-# Posições dos botões
-y_start = altura // 2 - (2 * (button_height + spacing) // 2)
-=======
+# Tamanho dos botões
+tamanho_x = tamanho_x_botao_menu
+altura_y = tamanho_y_botao_menu
 
-# Tamanho dos botões e espaçamento
-botao_altura = tamanho_x_botao_menu
-botao_largura = tamanho_y_botao_menu
+button_texts = ["Jogar", "Créditos", "Sair"]
+num_botoes = len(button_texts)
+total_altura = num_botoes * altura_y + (num_botoes - 1) * espacamento_menu
+y_start = (altura_tela - total_altura) // 2
 
+buttons = []
+for i in range(num_botoes):
+    x = (largura_tela - tamanho_x) // 2
+    y = y_start + i * (altura_y + espacamento_menu)
+    rect = pygame.Rect((x, y), (tamanho_x, altura_y))
+    buttons.append(rect)
 
-# Posições dos botões
-y_start = altura_tela // 2 - (2 * (botao_altura + espacamento_menu) // 2)
-
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
-
-# Posições da logo (logo acima dos botões)
-logo_height = 200  
-logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
-
-<<<<<<< HEAD
-buttons = [
-    pygame.Rect((largura // 2 - button_width // 2, y_start + i * (button_height + spacing)),
-                (button_width, button_height))
-=======
-
-buttons = [
-    pygame.Rect((largura_tela // 2 - botao_largura // 2, y_start + i * (botao_altura + espacamento_menu)),
-                (botao_largura, botao_altura))
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
-    for i in range(4)
-]
-button_texts = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
-
-# Variáveis para controle de entrada e redesenho
+# Controle
+selected_index = 0
 using_mouse = False
-selected_index = 0  
-redraw = True  # Só redesenha quando necessário
+redraw = True
+hover_states = [False] * len(buttons)
 
-# Carregar logo
-logo_path = dir_imgs_config +"logo.jpg"
-logo = pygame.image.load(logo_path)
-logo = pygame.transform.scale(logo, (250, logo_height))  
+# Cores
+BACKGROUND = (10, 20, 30)
+BOTAO = (50, 50, 50)
+HOVER = (0, 170, 160)
+TEXTO = (255, 255, 255)
+BORDA = (255, 255, 255)
 
-# Função para desenhar os botões
-def draw_button(button, text, color):
-<<<<<<< HEAD
-    pygame.draw.rect(screen, color, button, border_radius=10)
-    text_render = font.render(text, True, BLACK)
-    text_rect = text_render.get_rect(center=button.center)
-    screen.blit(text_render, text_rect)
-=======
-    pygame.draw.rect(tela, color, button, border_radius=10)
-    text_render = font.render(text, True, BLACK)
-    text_rect = text_render.get_rect(center=button.center)
-    tela.blit(text_render, text_rect)
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
+# Funções de desenho
+def draw_button(rect, text, active=False):
+    cor = HOVER if active else BOTAO
+    pygame.draw.rect(tela, cor, rect, border_radius=12)
+    pygame.draw.rect(tela, BORDA, rect, 3, border_radius=12)
 
-# Função para desenhar o menu 
+    txt = font.render(text, True, TEXTO)
+    sombra = font.render(text, True, (0, 0, 0))
+    sombra_rect = sombra.get_rect(center=(rect.centerx + 2, rect.centery + 2))
+    txt_rect = txt.get_rect(center=rect.center)
+
+    tela.blit(sombra, sombra_rect)
+    tela.blit(txt, txt_rect)
+
 def draw_menu():
-    global redraw
-    if redraw:
-<<<<<<< HEAD
-        screen.fill(GREEN)
+    if fundo:
+        tela.blit(fundo, (0, 0))
+    else:
+        tela.fill(BACKGROUND)
 
-        # Desenhar a logo no topo
-        screen.blit(logo, (largura // 2 - logo.get_width() // 2, logo_y_pos))
-=======
-        tela.fill(GREEN)
+    mouse_pos = pygame.mouse.get_pos()
 
-        # Desenhar a logo no topo
-        tela.blit(logo, (largura_tela // 2 - logo.get_width() // 2, logo_y_pos))
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd
+    for i, botao in enumerate(buttons):
+        hovering = botao.collidepoint(mouse_pos)
+        if hovering and not hover_states[i] and hover_sound:
+            hover_sound.play()
+        hover_states[i] = hovering
 
-        mouse_pos = pygame.mouse.get_pos()
+        ativo = (using_mouse and hovering) or (not using_mouse and i == selected_index)
+        draw_button(botao, button_texts[i], ativo)
 
-        for i, button in enumerate(buttons):
-            color = HOVER_COLOR if (using_mouse and button.collidepoint(mouse_pos)) or (not using_mouse and i == selected_index) else GRAY
-            draw_button(button, button_texts[i], color)
+    pygame.display.flip()
 
-        pygame.display.flip()
-        redraw = False  # Evita redesenho desnecessário
+# Função para carregar módulos
+def carregar_modulo(acao):
+    if acao == "jogar":
+        nome_modulo = "entidades.main"
+    elif acao == "credits":
+        show_popup("Créditos:\nFeito😎")
+        return
+    else:
+        show_popup(f"Ação desconhecida: {acao}")
+        return
 
-# Função para carregar e executar um módulo
-def carregar_modulo(nome_modulo):
     try:
         modulo = importlib.import_module(nome_modulo)
         if hasattr(modulo, "main"):
+            pygame.display.quit()
             modulo.main()
         else:
-            text = f"O módulo '{nome_modulo}' não possui uma função 'main'."
-            show_popup(text)
+            show_popup(f"O módulo '{nome_modulo}' não possui uma função 'main'.")
     except ModuleNotFoundError:
-            text = f"O módulo '{nome_modulo}' não foi encontrado."
-            show_popup(text)
+        show_popup(f"O módulo '{nome_modulo}' não foi encontrado.")
     except ImportError as e:
-            text = f"Erro ao importar o módulo '{nome_modulo}': {e}"
-            show_popup(text)
+        show_popup(f"Erro ao importar o módulo '{nome_modulo}': {e}")
 
-# Loop principal do jogo
+# Loop principal
 running = True
-
 while running:
-    draw_menu()  # Apenas redesenha se necessário
+    draw_menu()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False  
+            running = False
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             using_mouse = True
-            for i, button in enumerate(buttons):  # Verifica todos os botões
-                if button.collidepoint(event.pos):
+            for i, botao in enumerate(buttons):
+                if botao.collidepoint(event.pos):
+                    if click_sound:
+                        click_sound.play()
                     if i == 0:
-                        carregar_modulo("singleplayer")
+                        carregar_modulo("jogar")
                     elif i == 1:
-                        carregar_modulo("multiplayer")
-                    elif i == 2:
                         carregar_modulo("credits")
-                    elif i == 3:
-                        running = False  
+                    elif i == 2:
+                        running = False
                     redraw = True
 
         elif event.type == pygame.MOUSEMOTION:
             using_mouse = True
-            redraw = True  
+            redraw = True
 
         elif event.type == pygame.KEYDOWN:
             using_mouse = False
             if event.key in (pygame.K_UP, pygame.K_w):
-                selected_index = (selected_index - 1) % len(buttons)
+                previous_index = selected_index
+                selected_index = (selected_index - 1) % num_botoes
+                if selected_index != previous_index and hover_sound:
+                    hover_sound.play()
                 redraw = True
             elif event.key in (pygame.K_DOWN, pygame.K_s):
-                selected_index = (selected_index + 1) % len(buttons)
+                previous_index = selected_index
+                selected_index = (selected_index + 1) % num_botoes
+                if selected_index != previous_index and hover_sound:
+                    hover_sound.play()
                 redraw = True
             elif event.key == pygame.K_RETURN:
+                if click_sound:
+                    click_sound.play()
                 if selected_index == 0:
-                    carregar_modulo("singleplayer")
+                    carregar_modulo("jogar")
                 elif selected_index == 1:
-                    carregar_modulo("multiplayer")
-                elif selected_index == 2:
                     carregar_modulo("credits")
-                elif selected_index == 3:
-                    running = False  
+                elif selected_index == 2:
+                    running = False
                 redraw = True
 
-# Encerra o Pygame
+
 pygame.quit()

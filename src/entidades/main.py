@@ -1,6 +1,8 @@
 import pygame as pg
 import random as rd
 
+import importlib
+
 pg.init()
 # configurações da tela
 largura, altura = 920, 819

@@ -2,7 +2,7 @@ from .config_geral import carregar_dados, DIR_CONFIG
 
 
 # Carregando dados
-dados_tela = carregar_dados('tela', DIR_CONFIG)
+dados_tela = carregar_dados('tela')
 
 # Recebendo da tela
 largura_tela = dados_tela['largura']
