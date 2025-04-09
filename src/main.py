@@ -86,22 +86,22 @@ while running:
     grm.gerenciadores.testar_colisao(jogador_1, jogador_2)
 
 
-    # Desenhar jogadores na tela
-    jogador_1.desenhar(tela, snake_head_img, snake_body_img, TAMANHO_INICIAL_COBRA)
-    jogador_2.desenhar(tela, snake_head_img, snake_body_img, TAMANHO_INICIAL_COBRA)
-
     # Desenhando buffs
     for buff in BlocoRoxo.guardar_buffs:
         buff.desenhar_buff1(tela, apple_img)
 
     # Desenhando debuffs
     for debuff in Debuff.guardar_debuffs:
-        debuff.desenhar_debuff1(tela, apple_img)
+        debuff.desenhar_debuff1(tela, hole_img)
 
     # Desenhar coroa
     if visibilidade_coroa:
         coroa.desenhar_coroa(tela, coroa_img)
 
+    # Desenhar jogadores na tela
+    jogador_1.desenhar(tela, snake_head_img, snake_body_img, TAMANHO_INICIAL_COBRA)
+    jogador_2.desenhar(tela, snake_head_img, snake_body_img, TAMANHO_INICIAL_COBRA)
+  
     # Desenhar grade
     if mostrar_grade:
         grade(ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA, tela)
