@@ -1,18 +1,38 @@
 import pygame as pg
 
 
-def gerenciar_eventos_jogo(mostrar_grade):
+def atualizar_jogadores(
+    jogador_1, jogador_2,
+    keys, guardar_debuffs, coroa,
+    visibilidade_coroa, mapa, BlocoRoxo, Debuff,
+    ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA
+):
+    jogador_1.update(
+        keys, guardar_debuffs, coroa,
+        visibilidade_coroa, mapa, BlocoRoxo, Debuff,
+        ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA
+    )
+    jogador_2.update(
+        keys, guardar_debuffs, coroa,
+        visibilidade_coroa, mapa, BlocoRoxo, Debuff,
+        ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA
+    )
+
+
+def gerenciar_eventos_jogo(mostrar_grade, running):
     '''
     Gerenciar os eventos do jogo
     '''
     for event in pg.event.get():
-        if event.type == pg.QUIT: # Evento de fechar a janela
+        # Evento de terminar o jogo
+        if event.type == pg.QUIT:
             running = False
 
-            return running
-        elif event.type == pg.KEYDOWN: # Tecla pressionada
-            if event.key == pg.K_j:    # Alterna a grade ao pressionar J
+        elif event.type == pg.KEYDOWN:
+            if event.key == pg.K_j:  # Alterna a grade ao pressionar J
                 mostrar_grade = not mostrar_grade
+
+    return mostrar_grade, running
 
 
 def gerenciar_pontuacoes(jogador_1, jogador_2, largura_tela, tela):
@@ -95,3 +115,25 @@ def iniciar_loop(
 
         # Atualizar tela
         pg.display.flip()
+
+
+def testar_colisao(jogador_1, jogador_2):
+    '''
+    Resetar os jogadores caso passem um pelo outro, onde serao completamente resetados
+    '''
+    if jogador_1.corpo and jogador_2.corpo:
+        if jogador_1.corpo[0] in jogador_2.corpo or jogador_2.corpo[0] in jogador_1.corpo:
+            jogador_1.resetar()
+            jogador_2.resetar()
+
+
+def checar_vitoria(jogador_1, jogador_2):
+    '''
+    Checar se algum jogador venceu, e assim finalizar o jogo
+    '''
+    # O jogo acaba por uma vitoria de pontuacao
+    if jogador_1.pontuacao >= 100 or jogador_2.pontuacao >= 100:
+        pg.quit()
+    # O jogo acaba por uma vitoria de maior numero de coroas
+    elif jogador_1.contador_coroas == 3 or jogador_2.contador_coroas == 3:
+        pg.quit()

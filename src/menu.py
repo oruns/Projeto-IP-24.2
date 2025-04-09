@@ -8,9 +8,6 @@ from config import *
 import menu as mn
 
 
-# os.chdir(DIR_IMGS)
-
-
 # Inicializa o Pygame
 pg.init()
 pg.mixer.init()
@@ -29,7 +26,7 @@ total_altura_menu = num_botoes * BOTAO_MENU_ALTURA + (num_botoes - 1) * ESPACAME
 y_start = (ALTURA_TELA - total_altura_menu) // 2
 
 
-# Controle
+# Controle, indica o botao pressionado no menu
 selected_index = 0
 
 
@@ -37,14 +34,12 @@ buttons = mn.construindo_botoes(BOTAO_MENU_ALTURA, BOTAO_MENU_LARGURA,
                              ESPACAMENTO_MENU, LARGURA_TELA,
                              num_botoes, y_start)
 
-# Q isso?
+
 w = True
 hover_states = [False] * len(buttons)
 
 
-#ERRO RENOME?
 COR_BOTAO_MENU = (50, 50, 50)
-#FALTOU
 COR_TEXTO_MENU = (255, 255, 255)
 
 

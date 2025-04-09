@@ -2,11 +2,11 @@ import pygame as pg
 
 
 class Jogador:
-    def __init__(self, x, y, cor, teclas, TAMANHO_INICIAL_COBRA):
-        self.inicio = (x, y)
+    def __init__(self, coord_inic, cor, teclas, TAMANHO_INICIAL_COBRA):
+        self.coord_inic = coord_inic
         self.direcao = (0, 0)  # começa parado
 
-        self.corpo = [self.inicio]
+        self.corpo = [self.coord_inic]
 
         self.cor = cor
         self.velocidade = TAMANHO_INICIAL_COBRA
@@ -37,7 +37,7 @@ class Jogador:
             nova_parte = (self.corpo[0][0] + self.direcao[0],
                           self.corpo[0][1] + self.direcao[1])
         else:
-            nova_parte = self.inicio
+            nova_parte = self.coord_inic
 
 
         # Verificando a colisão com o labirinto
@@ -107,8 +107,11 @@ class Jogador:
             else:
                 tela.blit(snake_body_img, (segment[0], segment[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA))
 
+
+
+
     def resetar(self):
-        self.corpo = [self.inicio]
+        self.corpo = [self.coord_inic]
         self.direcao = (0, 0)
         self.crescer = False
         # pontuação não reseta mais, porém o jogador é penalizado em -5 pontos por colidir. Não permite ponto negativo.
