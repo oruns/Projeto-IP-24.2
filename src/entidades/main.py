@@ -1,28 +1,36 @@
 import pygame as pg
+
 import random as rd
+import os
 
 import importlib
 
+
+os.chdir('../imgs/')
+
+
 pg.init()
+
+
 # configurações da tela
 largura, altura = 920, 819
 screen = pg.display.set_mode((largura, altura))
 pg.display.set_caption("Jogo da Cobrinha com Labirinto")
 tamanho_cobras = 20
 tamanho_celula = 20
-coroa_img = pg.image.load("imgs/crown.png")
+coroa_img = pg.image.load("crown.png")
 coroa_img = pg.transform.scale(coroa_img, (30, 30))
-apple_img = pg.image.load("imgs/apple.png")
+apple_img = pg.image.load("apple.png")
 apple_img = pg.transform.scale(apple_img, (30, 30))
-hole_img = pg.image.load("imgs/hole.png")
+hole_img = pg.image.load("hole.png")
 hole_img = pg.transform.scale(hole_img, (30, 30))
-bush_img = pg.image.load("imgs/bush.png")
+bush_img = pg.image.load("bush.png")
 bush_img = pg.transform.scale(bush_img, (30, 30))
-snake_head_img = pg.image.load("imgs/snake_head.png")
+snake_head_img = pg.image.load("snake_head.png")
 snake_head_img = pg.transform.scale(snake_head_img, (30, 30))
-snake_body_img = pg.image.load("imgs/snake_body.png")
+snake_body_img = pg.image.load("snake_body.png")
 snake_body_img = pg.transform.scale(snake_body_img, (30, 30))
-plano_img = pg.image.load("imgs/plano.png")
+plano_img = pg.image.load("plano.png")
 plano_img = pg.transform.scale(plano_img, (30, 30))
 pos_coroa = (300, 300)
 BRANCO = (255, 255, 255)
@@ -207,7 +215,7 @@ class Coroas:
     def __init__(self, Mapa):
         self.mapa = Mapa
         self.reposicionar()
-        self.image = pg.image.load("imgs/crown.png").convert_alpha()
+        self.image = pg.image.load("crown.png").convert_alpha()
         self.image = pg.transform.scale(self.image, (tamanho_cobras, tamanho_cobras))
 
     def reposicionar(self):

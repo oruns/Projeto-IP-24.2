@@ -1,11 +1,11 @@
 from json import load
 
 
-# Dependendencia, ponto central falha aqui
-# Carregamento do diretorio
-
 # Diretorio com as configuracoes
 DIR_CONFIG = './config/'
+DIR_ASSETS = './assets/'
+
+
 # Se der errado acima, use:
 # DIR_CONFIG = '../../config/'
 
@@ -33,3 +33,10 @@ def carregar_dados(tipo):
     
 
     return dados
+
+
+def get_path_asset(nome):
+    dir_assets = DIR_ASSETS
+    nome_arquivo = dir_assets + nome
+
+    return nome_arquivo

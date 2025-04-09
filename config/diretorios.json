@@ -1,4 +1,4 @@
 {
-    "mapas": "mapas/",
+    "mapas": "../mapas/",
     "imgs": "imgs/"
 }

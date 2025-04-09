@@ -1,41 +1,55 @@
-import pygame
+import pygame as pg
 
 
-import importlib
 import os
-import tkinter as tk
-from tkinter import messagebox
-from json import load
+
+
 from config import *
+import menu as mn
+
+
+# os.chdir(DIR_IMGS)
 
 
 # Inicializa o Pygame
-# pygame.init()
+pg.init()
+pg.mixer.init()
 
 
-def show_popup(text):
-    root = tk.Tk()
-    root.withdraw()
-    messagebox.showinfo("Erro", text)
-    root.destroy()
+# Iniciando o menu
+# funcao de desenhar menu
+tela = mn.iniciar_tela(ALTURA_TELA, LARGURA_TELA, TITULO_MENU)
+font = mn.adicionar_fonte()
+fundo = mn.construindo_fundo(ALTURA_TELA, LARGURA_TELA, get_path_asset)
+hover_sound, click_sound = mn.adicionar_som(get_path_asset)
 
 
-# Configurações da tela do jogo
-tela = pygame.display.set_mode((largura_tela, altura_tela))
-pygame.display.set_caption(titulo_menu)
+num_botoes = len(TXT_BTNS_MENU)
+total_altura_menu = num_botoes * BOTAO_MENU_ALTURA + (num_botoes - 1) * ESPACAMENTO_MENU
+y_start = (ALTURA_TELA - total_altura_menu) // 2
 
 
-# Define a fonte para o texto nos botões
-font = pygame.font.Font(None, 50)
+# Controle
+selected_index = 0
 
 
-# Tamanho dos botões e espaçamento
-botao_altura = tamanho_x_botao_menu
-botao_largura = tamanho_y_botao_menu
+buttons = mn.construindo_botoes(BOTAO_MENU_ALTURA, BOTAO_MENU_LARGURA,
+                             ESPACAMENTO_MENU, LARGURA_TELA,
+                             num_botoes, y_start)
+
+# Q isso?
+w = True
+hover_states = [False] * len(buttons)
+
+
+#ERRO RENOME?
+COR_BOTAO_MENU = (50, 50, 50)
+#FALTOU
+COR_TEXTO_MENU = (255, 255, 255)
 
 
 # Posições dos botões
-y_start = altura_tela // 2 - (2 * (botao_altura + espacamento_menu) // 2)
+y_start = ALTURA_TELA // 2 - (2 * (BOTAO_MENU_ALTURA + ESPACAMENTO_MENU) // 2)
 
 
 # Posições da logo (logo acima dos botões)
@@ -43,85 +57,61 @@ logo_height = 200
 logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
 
 
-buttons = [
-    pygame.Rect((largura_tela // 2 - botao_largura // 2, y_start + i * (botao_altura + espacamento_menu)),
-                (botao_largura, botao_altura))
-    for i in range(4)
-]
-button_texts = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
-
 # Variáveis para controle de entrada e redesenho
 using_mouse = False
 selected_index = 0  
 redraw = True  # Só redesenha quando necessário
 
-# Carregar logo
-logo_path = dir_imgs_config +"logo.jpg"
-logo = pygame.image.load(logo_path)
-logo = pygame.transform.scale(logo, (250, logo_height))  
 
-# Função para desenhar os botões
-def draw_button(button, text, color):
-    pygame.draw.rect(tela, color, button, border_radius=10)
-    text_render = font.render(text, True, BLACK)
-    text_rect = text_render.get_rect(center=button.center)
-    tela.blit(text_render, text_rect)
+# Carregando logo
+# logo_path = get_path_asset('logo.jpg')
+os.chdir(DIR_IMGS)
 
-# Função para desenhar o menu 
-def draw_menu():
-    global redraw
-    if redraw:
-        tela.fill(GREEN)
+logo = pg.image.load('logo.jpg')
+logo = pg.transform.scale(logo, (250, logo_height))  
 
-        # Desenhar a logo no topo
-        tela.blit(logo, (largura_tela // 2 - logo.get_width() // 2, logo_y_pos))
 
-        mouse_pos = pygame.mouse.get_pos()
+# Preenchendo fundo da tela
+if fundo:
+    tela.blit(fundo, (0, 0))
+else:
+    tela.fill(COR_BACKG_RESERVA_MENU)
 
-    for i, botao in enumerate(buttons):
-        hovering = botao.collidepoint(mouse_pos)
-        if hovering and not hover_states[i] and hover_sound:
-            hover_sound.play()
-        hover_states[i] = hovering
 
-        ativo = (using_mouse and hovering) or (not using_mouse and i == selected_index)
-        draw_button(botao, button_texts[i], ativo)
+mouse_pos = pg.mouse.get_pos()
 
-        pygame.display.flip()
-        redraw = False  # Evita redesenho desnecessário
+# Desenhando botoes na tela
+for i, botao in enumerate(buttons):
+    hovering = botao.collidepoint(mouse_pos)
 
-# Função para carregar módulos
-def carregar_modulo(acao):
-    if acao == "jogar":
-        nome_modulo = "entidades.main"
-    elif acao == "credits":
-        show_popup("Créditos:\nFeito😎")
-        return
-    else:
-        show_popup(f"Ação desconhecida: {acao}")
-        return
 
-    try:
-        modulo = importlib.import_module(nome_modulo)
-        if hasattr(modulo, "main"):
-            pygame.display.quit()
-            modulo.main()
-        else:
-            show_popup(f"O módulo '{nome_modulo}' não possui uma função 'main'.")
-    except ModuleNotFoundError:
-        show_popup(f"O módulo '{nome_modulo}' não foi encontrado.")
-    except ImportError as e:
-        show_popup(f"Erro ao importar o módulo '{nome_modulo}': {e}")
+    if hovering and not hover_states[i] and hover_sound:
+        hover_sound.play()
+    hover_states[i] = hovering
+
+
+    ativo = (using_mouse and hovering) or (not using_mouse and i == selected_index)
+    mn.desenhando_botao(COR_BORDA_MENU, COR_BOTAO_MENU, COR_HOVER_MENU, COR_TEXTO_MENU,
+                        font, botao, tela, TXT_BTNS_MENU[i], ativo)
+
+
+# Atualizando a tela
+pg.display.flip()
+
 
 # Loop principal
 running = True
-while running:
-    draw_menu()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+while running:
+    mn.desenhando_fundo(COR_BACKG_RESERVA_MENU, fundo, tela)
+
+    # Tratando os eventos do jogo
+    for event in pg.event.get():
+        # Terminando o jogo
+        if event.type == pg.QUIT:
             running = False  
 
+        # Qualquer botao do mouse eh pressionado
         elif event.type == pg.MOUSEBUTTONDOWN:
             using_mouse = True
             for i, botao in enumerate(buttons):
@@ -129,33 +119,45 @@ while running:
                     if click_sound:
                         click_sound.play()
                     if i == 0:
-                        carregar_modulo("jogar")
+                        mn.carregar_modulo("jogar")
                     elif i == 1:
-                        carregar_modulo("credits")
+                        mn.carregar_modulo("credits")
                     elif i == 2:
                         running = False
                     redraw = True
 
+        # Mouse em movimento
         elif event.type == pg.MOUSEMOTION:
             using_mouse = True
             redraw = True
 
         elif event.type == pg.KEYDOWN:
             using_mouse = False
-            if event.key in (pygame.K_UP, pygame.K_w):
-                selected_index = (selected_index - 1) % len(buttons)
+            if event.key in (pg.K_UP, pg.K_w):
+                previous_index = selected_index
+                selected_index = (selected_index - 1) % num_botoes
+                if selected_index != previous_index and hover_sound:
+                    hover_sound.play()
                 redraw = True
-            elif event.key in (pygame.K_DOWN, pygame.K_s):
-                selected_index = (selected_index + 1) % len(buttons)
+            elif event.key in (pg.K_DOWN, pg.K_s):
+                previous_index = selected_index
+                selected_index = (selected_index + 1) % num_botoes
+                if selected_index != previous_index and hover_sound:
+                    hover_sound.play()
                 redraw = True
-            elif event.key == pygame.K_RETURN:
+            elif event.key == pg.K_RETURN:
+                os.chdir('../src/')
+
+                if click_sound:
+                    click_sound.play()
                 if selected_index == 0:
-                    carregar_modulo("jogar")
+                    mn.carregar_modulo("jogar")
                 elif selected_index == 1:
-                    carregar_modulo("credits")
+                    mn.carregar_modulo("credits")
                 elif selected_index == 2:
                     running = False
                 redraw = True
 
+
 # Encerra o Pygame
-pygame.quit()
+pg.quit()

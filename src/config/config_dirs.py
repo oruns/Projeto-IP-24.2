@@ -5,5 +5,5 @@ dirs = carregar_dados('diretorios_projeto')
 
 
 # Recebendo diretorios
-dir_mapas = dirs['mapas']
-dir_imgs = dirs['imgs']
+DIR_MAPAS = dirs['mapas']
+DIR_IMGS = dirs['imgs']

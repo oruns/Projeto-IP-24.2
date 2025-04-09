@@ -21,6 +21,8 @@ TITULO_JOGO = dados_tela['titulo_jogo']
 TITULO_MENU = dados_tela['titulo_menu']
 
 TEXTOS_BOTOES_MENU = ["Singleplayer", "Multiplayer", "Créditos", "Sair"]
+TXT_BTNS_MENU = ["Jogar", "Créditos", "Sair"]
+
 
 
 ### Constantes
@@ -34,4 +36,3 @@ LOGO_Y = Y_START_BTN - LOGO_MENU_ALTURA - 20  # Logo acima dos botões, com um e
 ### Objetos do pygame
 
 # Define a fonte para o texto nos botões
-FONT_MENU = pg.font.Font(None, 50)

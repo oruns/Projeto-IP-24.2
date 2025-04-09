@@ -13,6 +13,10 @@ CONTROLE_SETAS= {
     "up": pg.K_UP, "down": pg.K_DOWN, "left": pg.K_LEFT, "right": pg.K_RIGHT
 }
 
+controles = {
+    'wasd': CONTROLE_WASD,
+    'setas': CONTROLE_SETAS
+}
 
 # Carregando dados
 dados_entidades = carregar_dados('entidades')
@@ -23,3 +27,8 @@ tamanho_inicial_cobra = dados_entidades['tamanho_inicial_cobra']
 velocidade = dados_entidades['velocidade_cobra']
 jog_1_coord_inic = dados_entidades['jogador_1_coord_inicial']
 jog_2_coord_inic = dados_entidades['jogador_2_coord_inicial']
+
+coords_iniciais = {
+    'jogador_1_coord_inic': jog_1_coord_inic,
+    'jogador_2_coord_inic': jog_2_coord_inic
+}

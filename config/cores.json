@@ -6,5 +6,8 @@
     "cinza_escuro": [100, 100, 100],
     "verde": [0, 255, 0],
     "roxo": [128, 0, 128],
-    "cor_mouse": [70, 70, 70]
+    "cor_mouse": [70, 70, 70],
+    "borda_menu": [255, 255, 255],
+    "hover_menu": [0, 170, 160],
+    "background_reserva_menu": [10, 20, 30]
 }
