@@ -1,12 +1,11 @@
 import pygame as pg
-<<<<<<< HEAD
 import random as rd
 
 
 from json import load
 
 
-from jogador import Jogador
+from entidades._jogador import Jogador
 
 
 # diretorio melhor maneira?
@@ -127,12 +126,11 @@ while running:
     pg.display.flip()
 
 pg.quit()
-=======
 
 from config import carregar_dados
 
 from item_crescer import ItemCrescer
-from jogador import Jogador
+from entidades._jogador import Jogador
 
 
 
@@ -140,4 +138,3 @@ from jogador import Jogador
 # Colocar dados em arquivo separado
 # diretorio melhor maneira?
 # Abrindo JSON
->>>>>>> 311b799e66e8cc5e7890c417ce411e52da67e5bd

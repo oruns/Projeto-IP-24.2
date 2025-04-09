@@ -1,9 +1,9 @@
 {
     "largura": 920,
-    "altura": 800,
+    "altura": 819,
     "botao_menu_largura": 250,
     "botao_menu_altura": 60,
     "espacamento_menu": 20,
-    "titulo_jogo": "Jogo da Cobrinha-nome generico",
+    "titulo_jogo": "Jogo da Cobrinha com Labirinto",
     "titulo_menu": ""
 }

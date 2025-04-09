@@ -1,121 +1,116 @@
 import pygame as pg
 
 
-#tamanho cobra constantes
-#Colocar dados em arquivo separado
 class Jogador:
-    def __init__(self, cor, controles, coord_inicial, velocidade):
-        self.receber_dados_movimento(controles, velocidade)
-        self.montar_corpo(cor, coord_inicial)
+    def __init__(self, x, y, cor, teclas, TAMANHO_INICIAL_COBRA):
+        self.inicio = (x, y)
+        self.direcao = (0, 0)  # começa parado
 
-        self.pontuacao = 0
-    
-    
-    def montar_corpo(self, cor, coord_inicial):
-        self.coord_inicial = coord_inicial
+        self.corpo = [self.inicio]
+
         self.cor = cor
-        self.corpo = [self.coord_inicial]
+        self.velocidade = TAMANHO_INICIAL_COBRA
+        self.teclas = teclas
         self.crescer = False
 
+        self.pontuacao = 0
 
-    def receber_dados_movimento(self, controles, velocidade):
-        '''
-        Receber dados relativos ao movimento dos jogadores
-        '''
-        self.direcao_atual = (0, 0) # Começa parado
-        self.velocidade = velocidade
-        self.controles = controles
+        self.contador_buffs = 0
+        self.contador_veneno = 0  # veneno vezes #########
+        self.contador_coroas = 0
 
 
-    def mudar_direcao(self, controles, direcao_atual, tecla_pressionada, velocidade):
-        tecla_up = controles['up']
-        tecla_down = controles['down']
-        tecla_left = controles['left']
-        tecla_right = controles['right']
+    def update(self, keys, debuff, coroa, visibilidade_coroa,
+               mapa, BlocoRoxo, Debuff,
+               ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA):
+        if keys[self.teclas["up"]] and self.direcao != (0, self.velocidade):
+            self.direcao = (0, -self.velocidade)
+        if keys[self.teclas["down"]] and self.direcao != (0, -self.velocidade):
+            self.direcao = (0, self.velocidade)
+        if keys[self.teclas["left"]] and self.direcao != (self.velocidade, 0):
+            self.direcao = (-self.velocidade, 0)
+        if keys[self.teclas["right"]] and self.direcao != (-self.velocidade, 0):
+            self.direcao = (self.velocidade, 0)
 
 
-        if tecla_pressionada[tecla_up] and direcao_atual != (0, velocidade):
-            self.direcao_atual = (0, -velocidade)
-        if tecla_pressionada[tecla_down] and direcao_atual != (0, -velocidade):
-            self.direcao_atual = (0, velocidade)
-        if tecla_pressionada[tecla_left] and direcao_atual != (velocidade, 0):
-            self.direcao_atual = (-velocidade, 0)
-        if tecla_pressionada[tecla_right] and direcao_atual != (-velocidade, 0):
-            self.direcao_atual = (velocidade, 0) 
-
-
-    # Self dentro das funcoes ou como parametros? Contexto?
-    def analisar_movimento(self, tecla_pressionada):
-        '''
-        Mudar a direcao do jogador, segundo as teclas do teclado
-        '''
-        controles = self.controles
-        direcao_atual = self.direcao_atual
-        velocidade = self.velocidade
-
-        self.mudar_direcao(controles, direcao_atual, tecla_pressionada, velocidade)
-
-
-    def update(self, tecla_pressionada, buff_1, dados_tela):
-        '''
-        Atualizar o jogador de acordo com o andamento do jogo
-        '''
-        # Atualizar o movimento do jogador
-        self.analisar_movimento(tecla_pressionada)
-
-
-        corpo = self.corpo
-        direcao_atual = self.direcao_atual
-        coord_inicial = self.coord_inicial
-        velocidade = self.velocidade
-
-        
-        altura_tela = dados_tela['altura']
-        largura_tela = dados_tela['largura']
-
-        # Se o corpo da cobra ainda tem partes,
-        # Falta comentar
-        if corpo:
-            # Falta comentar
-            nova_parte = (corpo[0][0] + direcao_atual[0], corpo[0][1] + direcao_atual[1])
+        if self.corpo:
+            nova_parte = (self.corpo[0][0] + self.direcao[0],
+                          self.corpo[0][1] + self.direcao[1])
         else:
-            nova_parte = coord_inicial
+            nova_parte = self.inicio
 
 
-        # Se a cobrar sair da tela, recomecar jogo
-        if (nova_parte[0] < 0 or nova_parte[0] >= largura_tela or
-                nova_parte[1] < 0 or nova_parte[1] >= altura_tela):
+        # Verificando a colisão com o labirinto
+        if mapa.labirinto[nova_parte[1] // TAMANHO_INICIAL_COBRA][nova_parte[0] // TAMANHO_INICIAL_COBRA] == 1:
             self.resetar()
             return
-        # Falta comentar
-        if nova_parte in corpo[1:]:
+
+
+        if (nova_parte[0] < 0 or nova_parte[0] >= LARGURA_TELA or
+                nova_parte[1] < 0 or nova_parte[1] >= ALTURA_TELA):
             self.resetar()
             return
-        if pg.Rect(nova_parte[0], nova_parte[1], velocidade, velocidade).colliderect(
-                pg.Rect(buff_1.x, buff_1.y, velocidade, velocidade)):
-            self.pontuacao += 10
-            self.crescer = True
-            buff_1.reposicionar(altura_tela, largura_tela, velocidade)
 
-        corpo.insert(0, nova_parte)
+
+        if nova_parte in self.corpo[1:]:
+            self.resetar()
+            return
+
+
+        # Verifica se cabeça colidiu com o buff 1
+        for buff in BlocoRoxo.guardar_buffs:
+            if pg.Rect(nova_parte[0], nova_parte[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA).colliderect(
+                    pg.Rect(buff.x, buff.y, TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA)):
+                self.pontuacao += 10
+                self.contador_buffs += 1
+                self.crescer = True
+                buff.reposicionar(ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA)
+
+
+        ############# Verifica se a cabeça da cobra colidiu com o debuff ##########
+        for debuff in Debuff.guardar_debuffs:
+            if pg.Rect(nova_parte[0], nova_parte[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA).colliderect(
+                    pg.Rect(debuff.x, debuff.y, TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA)):
+                if len(self.corpo) > 1:  # cobra não desaparece
+                    self.corpo.pop()  # tira um bloco do corpo da cobra
+
+                    self.contador_veneno += 1  # debuffs coletados
+                    debuff.reposicionar(ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA)
+            # pontos de veneno não negativam a pontuação total
+                if self.pontuacao >= 10:
+                    self.pontuacao -= 10
+                    self.contador_veneno += 1
+                    debuff.reposicionar(ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA)
+                elif self.pontuacao < 10:
+                    self.pontuacao -= self.pontuacao
+                    self.contador_veneno += 1
+                    debuff.reposicionar(ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA)
+
+        ############ verifica se a cabeça da cobra colidiu com a coroa ############
+        if visibilidade_coroa and pg.Rect(nova_parte[0], nova_parte[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA).colliderect(
+                pg.Rect(coroa.x, coroa.y, TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA)):
+            self.contador_coroas += 1
+            coroa.reposicionar(mapa, ALTURA_TELA, LARGURA_TELA, TAMANHO_INICIAL_COBRA)
+
+        self.corpo.insert(0, nova_parte)
 
         if not self.crescer:
-            corpo.pop()
+            self.corpo.pop()
         else:
             self.crescer = False
 
-
-    def desenhar(self, tela):
-        velocidade = self.velocidade
-        corpo = self.corpo
-
-        for segment in corpo:
-            pg.draw.rect(tela, self.cor, (segment[0], segment[1], velocidade, velocidade))
-
+    def desenhar(self, tela, snake_head_img, snake_body_img,
+                 TAMANHO_INICIAL_COBRA):
+        for segment in self.corpo:
+            if segment == self.corpo[0]:
+                tela.blit(snake_head_img, (segment[0], segment[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA))
+            else:
+                tela.blit(snake_body_img, (segment[0], segment[1], TAMANHO_INICIAL_COBRA, TAMANHO_INICIAL_COBRA))
 
     def resetar(self):
-        self.corpo = [self.coord_inicial]
-        self.direcao_atual = (0, 0)
+        self.corpo = [self.inicio]
+        self.direcao = (0, 0)
         self.crescer = False
-        self.pontuacao = 0
+        # pontuação não reseta mais, porém o jogador é penalizado em -5 pontos por colidir. Não permite ponto negativo.
+        self.pontuacao = self.pontuacao = max(0, self.pontuacao - 5)
         pg.time.delay(500)

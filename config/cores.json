@@ -1,13 +1,19 @@
 {
     "azul": [0, 0, 255],
     "branco": [255, 255, 255],
+    "bege": [216,204,181],
     "preto": [0, 0, 0],
-    "cinza": [150, 150, 150],
+    "cinza1": [150, 150, 150],
+    "cinza2": [64, 64, 64],
     "cinza_escuro": [100, 100, 100],
     "verde": [0, 255, 0],
     "roxo": [128, 0, 128],
+    "rosa": [255, 192, 203],
+    "vermelho": [255, 0, 0],
     "cor_mouse": [70, 70, 70],
     "borda_menu": [255, 255, 255],
     "hover_menu": [0, 170, 160],
-    "background_reserva_menu": [10, 20, 30]
+    "background_reserva_menu": [10, 20, 30],
+    "bloco_roxo": [128, 0, 128],
+    "cor_debuff": [64, 64, 64]
 }

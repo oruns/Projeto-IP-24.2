@@ -112,23 +112,23 @@ def desenhando_botao(COR_BORDA, COR_BOTAO, COR_HOVER, COR_TEXTO,
 # Função para carregar módulos
 def carregar_modulo(acao):
     if acao == "jogar":
-        nome_modulo = "entidades.main"
+        nome_modulo = "main"
     elif acao == "credits":
-        # show_popup("Créditos:\nFeito😎")
-        show_popup("Creditos:\nFeito")
+        show_popup("Créditos:\nFeito😎")
         return
     else:
         show_popup(f"Ação desconhecida: {acao}")
         return
 
-    try:
-        modulo = importlib.import_module(nome_modulo)
-        if hasattr(modulo, "main"):
-            pg.display.quit()
-            modulo.main()
-        else:
-            show_popup(f"O módulo '{nome_modulo}' não possui uma função 'main'.")
-    except ModuleNotFoundError:
-        show_popup(f"O módulo '{nome_modulo}' não foi encontrado.")
-    except ImportError as e:
-        show_popup(f"Erro ao importar o módulo '{nome_modulo}': {e}")
+    import main
+    # try:
+    #     modulo = importlib.import_module(nome_modulo)
+    #     if hasattr(modulo, "main"):
+    #         pg.display.quit()
+    #         modulo.main()
+    #     else:
+    #         show_popup(f"O módulo '{nome_modulo}' não possui uma função 'main'.")
+    # except ModuleNotFoundError:
+    #     show_popup(f"O módulo '{nome_modulo}' não foi encontrado.")
+    # except ImportError as e:
+    #     show_popup(f"Erro ao importar o módulo '{nome_modulo}': {e}")

@@ -23,7 +23,7 @@ dados_entidades = carregar_dados('entidades')
 
 
 # Recebendo dados das cobras
-tamanho_inicial_cobra = dados_entidades['tamanho_inicial_cobra']
+TAMANHO_INICIAL_COBRA = dados_entidades['tamanho_inicial_cobra']
 velocidade = dados_entidades['velocidade_cobra']
 jog_1_coord_inic = dados_entidades['jogador_1_coord_inicial']
 jog_2_coord_inic = dados_entidades['jogador_2_coord_inicial']
@@ -32,3 +32,6 @@ coords_iniciais = {
     'jogador_1_coord_inic': jog_1_coord_inic,
     'jogador_2_coord_inic': jog_2_coord_inic
 }
+
+
+POS_COROA = dados_entidades['posicao_coroa']

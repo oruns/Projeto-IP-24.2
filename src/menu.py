@@ -53,7 +53,7 @@ y_start = ALTURA_TELA // 2 - (2 * (BOTAO_MENU_ALTURA + ESPACAMENTO_MENU) // 2)
 
 
 # Posições da logo (logo acima dos botões)
-logo_height = 200  
+logo_height = 200
 logo_y_pos = y_start - logo_height - 20  # Logo acima dos botões, com um espaçamento de 20 pixels
 
 
