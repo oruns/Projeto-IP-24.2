@@ -61,6 +61,7 @@ while running:
                         mn.carregar_modulo("jogar")
                     elif i == 1:
                         mn.carregar_modulo("credits")
+                        pg.event.clear()  # <- ESSENCIAL AQUI
                     elif i == 2:
                         running = False
                     redraw = True
@@ -84,16 +85,18 @@ while running:
                     hover_sound.play()
                 redraw = True
             elif event.key == pg.K_RETURN:
-                os.chdir('../src/')
                 if click_sound:
                     click_sound.play()
                 if selected_index == 0:
+                    os.chdir('../src/')  
                     mn.carregar_modulo("jogar")
                 elif selected_index == 1:
                     mn.carregar_modulo("credits")
+                    pg.event.clear()  # <- Limpa os eventos ao voltar dos créditos
                 elif selected_index == 2:
                     running = False
                 redraw = True
+
 
     if redraw:
         mouse_pos = pg.mouse.get_pos()

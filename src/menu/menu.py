@@ -99,15 +99,16 @@ def desenhando_botao(cor_borda, cor_normal, cor_hover, cor_texto,
     tela.blit(texto_render, texto_rect)
 
 # Função para carregar módulos
+# Função para carregar módulos
 def carregar_modulo(acao):
     if acao == "jogar":
         nome_modulo = "main"
+        __import__(nome_modulo)
     elif acao == "credits":
-        show_popup("Créditos:\nFeito😎")
-        return
+        import tela_creditos
+        tela_creditos.mostrar_creditos()
     else:
         show_popup(f"Ação desconhecida: {acao}")
-        return
 
     import main
     # try:
