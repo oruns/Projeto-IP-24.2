@@ -39,7 +39,7 @@ Sistema funcionando
 
 
 
-Ferramentas:
+#Ferramentas:
 As ferramentas, bibliotecas, frameworks utilizados com as respectivas justificativas para o uso;
 Discord: amplamente utilizado como meio de comunicação entre os membros do grupo, e inicialmente foi usado para enviar as partes do código. 
 Visual Studio Code: um dos principais meios utilizados pela equipe para desenvolver o código do jogo.
