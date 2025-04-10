@@ -39,16 +39,16 @@ Sistema funcionando
 
 
 
-#Ferramentas:
 As ferramentas, bibliotecas, frameworks utilizados com as respectivas justificativas para o uso;
+Ferramentas:
 Discord: amplamente utilizado como meio de comunicação entre os membros do grupo, e inicialmente foi usado para enviar as partes do código. 
 Visual Studio Code: um dos principais meios utilizados pela equipe para desenvolver o código do jogo.
-GitHub: meio principal de compartilhamento do código entre os membros da equipe. Utilizado para organizar e modularizar as partes desenvolvidas
+GitHub: meio principal de compartilhamento do código entre os membros da equipe. Utilizado para organizar e modularizar as partes desenvolvidas.
 Bibliotecas:
 Pygame: biblioteca principal, utilizada como alicerce para construção e desenvolvimento do jogo 2d Snake Duo.
 Random: biblioteca cujo propósito no código foi de acrescentar aleatoriedade ao aparecimento dos coletáveis. As coroas, bombas e maçãs aparecem pelo mapa de maneira aleatória de forma a criar uma dificuldade e competitividade no jogo.
-OS: biblioteca para trabalhar com diretórios, especialmente para trocar de pasta antes de carregar imagens
-SYS: biblioteca para sair completamente do programa, por exemplo, nos créditos
+OS: biblioteca para trabalhar com diretórios, especialmente para trocar de pasta antes de carregar imagens.
+SYS: biblioteca para sair completamente do programa, por exemplo, nos créditos.
 
 Frameworks:
 A equipe não utilizou frameworks.  
@@ -57,7 +57,7 @@ Divisão de trabalho
 Anderson Lima - avll:  Parte gráfica e organização da equipe e das tarefas.
 Renata Alves  - rgaw: Classes/objetos, colisões e movimentação.
 Julio Cesar de lima - jcbl2: Refatoração e debug.
- Felipe de Lima -  flo:  Mapas e lógica do código
+Felipe de Lima -  flo:  Mapas e lógica do código
 Edenn Weslley - ewss:  Modularização e menu.
 
 Conceitos
