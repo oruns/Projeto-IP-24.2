@@ -12,7 +12,10 @@
     "vermelho": [255, 0, 0],
     "cor_mouse": [70, 70, 70],
     "borda_menu": [255, 255, 255],
+    "botao_menu": [50, 50, 50],
     "hover_menu": [0, 170, 160],
+    "texto_menu": [255,255,255],
+    "backg_reserva_menu": [0,0,0],
     "background_reserva_menu": [10, 20, 30],
     "bloco_roxo": [128, 0, 128],
     "cor_debuff": [64, 64, 64]

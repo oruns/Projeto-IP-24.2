@@ -87,27 +87,16 @@ def construindo_botoes(BOTAO_MENU_ALTURA, BOTAO_MENU_LARGURA,
     return buttons
 
 
-def desenhando_botao(COR_BORDA, COR_BOTAO, COR_HOVER, COR_TEXTO,
-                      font, rect, tela, text, active=False):
-    # Decidindo a cor do botao
-    cor = COR_HOVER if active else COR_BOTAO
+def desenhando_botao(cor_borda, cor_normal, cor_hover, cor_texto,
+                     fonte, rect, tela, texto, ativo, borda=10):
+    pg.draw.rect(tela, cor_borda, rect)
+    inner_rect = rect.inflate(-2 * borda, -2 * borda)
+    cor_fundo = cor_hover if ativo else cor_normal
+    pg.draw.rect(tela, cor_fundo, inner_rect)
 
-    # Desenhando o botao na tela
-    pg.draw.rect(tela, cor, rect, border_radius=12)
-    pg.draw.rect(tela, COR_BORDA, rect, 3, border_radius=12)
-
-    # Construindo o texto do botao
-    txt = font.render(text, True, COR_TEXTO)
-    txt_rect = txt.get_rect(center=rect.center)
-
-    # Construindo a sombra do botao
-    sombra = font.render(text, True, (0, 0, 0))
-    sombra_rect = sombra.get_rect(center=(rect.centerx + 2, rect.centery + 2))
-
-    # Desenhando a sombra e o texto na tela
-    tela.blit(sombra, sombra_rect)
-    tela.blit(txt, txt_rect)
-
+    texto_render = fonte.render(texto, True, cor_texto)
+    texto_rect = texto_render.get_rect(center=inner_rect.center)
+    tela.blit(texto_render, texto_rect)
 
 # Função para carregar módulos
 def carregar_modulo(acao):
