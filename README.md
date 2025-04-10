@@ -40,10 +40,12 @@ Sistema funcionando
 
 
 As ferramentas, bibliotecas, frameworks utilizados com as respectivas justificativas para o uso;
+
 Ferramentas:
 Discord: amplamente utilizado como meio de comunicação entre os membros do grupo, e inicialmente foi usado para enviar as partes do código. 
 Visual Studio Code: um dos principais meios utilizados pela equipe para desenvolver o código do jogo.
 GitHub: meio principal de compartilhamento do código entre os membros da equipe. Utilizado para organizar e modularizar as partes desenvolvidas.
+
 Bibliotecas:
 Pygame: biblioteca principal, utilizada como alicerce para construção e desenvolvimento do jogo 2d Snake Duo.
 Random: biblioteca cujo propósito no código foi de acrescentar aleatoriedade ao aparecimento dos coletáveis. As coroas, bombas e maçãs aparecem pelo mapa de maneira aleatória de forma a criar uma dificuldade e competitividade no jogo.
@@ -70,11 +72,14 @@ Tuplas: esse conceito foi usado majoritariamente para definição de coordenadas
 Programação orientada a objetos(opp): esse conceito foi usado para criar as classes de jogador e coletáveis dentro do jogo(maçãs, bombinhas e coroas).
 
 Desafios
-Os desafios e erros enfrentados no decorrer do projeto e as lições aprendidas. Para tanto, respondam às seguintes perguntas:
+Os desafios e erros enfrentados no decorrer do projeto e as lições aprendidas:
+
 Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?
 A criação das colisões foi um dos momentos que geraram mais falhas. Foi preciso um trabalho constante de acertos e erros até conseguirmos chegar ao resultado final. Para lidar com isso, foi preciso tirar um tempo de estudo mais aprofundado sobre como implementar os conceitos vistos em aula junto ao uso das bibliotecas utilizadas.
+
 Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
 Um dos maiores desafios foi a comunicação entre os membros, o projeto foi proposto num momento em que nós alunos estávamos realizando outros trabalhos e provas das demais disciplinas. Por conta disso, a equipe demorou a estabelecer uma comunicação viável. Isso só foi resolvido quando esse período terminou.  
+
 Quais as lições aprendidas durante o projeto?
 Uma das lições mais importantes que pudemos aprender foi a importância e a realização de um trabalho em equipe, no qual todas as partes foram igualmente importantes no desenvolvimento e organização do projeto.
 
