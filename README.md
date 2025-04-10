@@ -39,7 +39,6 @@ Sistema funcionando
 
 
 
-As ferramentas, bibliotecas, frameworks utilizados com as respectivas justificativas para o uso;
 
 Ferramentas:
 Discord: amplamente utilizado como meio de comunicação entre os membros do grupo, e inicialmente foi usado para enviar as partes do código. 
@@ -55,16 +54,15 @@ SYS: biblioteca para sair completamente do programa, por exemplo, nos créditos.
 Frameworks:
 A equipe não utilizou frameworks.  
 
-Divisão de trabalho
+Divisão de trabalho:
+
 Anderson Lima - avll:  Parte gráfica e organização da equipe e das tarefas.
 Renata Alves  - rgaw: Classes/objetos, colisões e movimentação.
 Julio Cesar de lima - jcbl2: Refatoração e debug.
 Felipe de Lima -  flo:  Mapas e lógica do código
 Edenn Weslley - ewss:  Modularização e menu.
 
-Conceitos
-
-Os conceitos que foram apresentados durante a disciplina e utilizados no projeto (indicando onde foram usados);
+Conceitos:
 
 Condicionais(if - elif - else): esse conceito aparece no momento de definir a movimentação de cada jogador, ajudar a definir as colisões, aumento ou diminuição do tamanho de cada player, visibilidade da coroa.
 
