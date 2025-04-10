@@ -63,24 +63,33 @@ Felipe de Lima -  flo:  Mapas e lógica do código
 Edenn Weslley - ewss:  Modularização e menu.
 
 Conceitos
+
 Os conceitos que foram apresentados durante a disciplina e utilizados no projeto (indicando onde foram usados);
+
 Condicionais(if - elif - else): esse conceito aparece no momento de definir a movimentação de cada jogador, ajudar a definir as colisões, aumento ou diminuição do tamanho de cada player, visibilidade da coroa.
+
 Laços de repetição(for - while): conceito fundamental que propicia o funcionamento do jogo, pois o mesmo é rodado no laço de repetição running. Além disso, tal conceito é utilizado para manter os coletáveis aparecendo no mapa (desenhar os coletáveis no mapa acontece por meio de laços de repetição), a própria ação de reposicionar das cobrinhas ocorre por meio desse conceito.
+
 Funções: esse conceito foi amplamente utilizado para definir desde ações dentro das classes de objetos até usos específicos da biblioteca pygame, como as funções de desenho dos objetos coletáveis e jogadores.
+
 Listas: esse conceito esteve presente no desenvolvimento do código para guardar a quantidade desejada de maçãs e bombinhas.
+
 Tuplas: esse conceito foi usado majoritariamente para definição de coordenadas e uso das cores na biblioteca pygame. 
+
 Programação orientada a objetos(opp): esse conceito foi usado para criar as classes de jogador e coletáveis dentro do jogo(maçãs, bombinhas e coroas).
 
-Desafios
 Os desafios e erros enfrentados no decorrer do projeto e as lições aprendidas:
 
 Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?
+
 A criação das colisões foi um dos momentos que geraram mais falhas. Foi preciso um trabalho constante de acertos e erros até conseguirmos chegar ao resultado final. Para lidar com isso, foi preciso tirar um tempo de estudo mais aprofundado sobre como implementar os conceitos vistos em aula junto ao uso das bibliotecas utilizadas.
 
 Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
+
 Um dos maiores desafios foi a comunicação entre os membros, o projeto foi proposto num momento em que nós alunos estávamos realizando outros trabalhos e provas das demais disciplinas. Por conta disso, a equipe demorou a estabelecer uma comunicação viável. Isso só foi resolvido quando esse período terminou.  
 
 Quais as lições aprendidas durante o projeto?
+
 Uma das lições mais importantes que pudemos aprender foi a importância e a realização de um trabalho em equipe, no qual todas as partes foram igualmente importantes no desenvolvimento e organização do projeto.
 
 Documentação
