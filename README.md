@@ -31,6 +31,7 @@ e execute o menu.py.
 Sistema funcionando
 ![image](https://github.com/user-attachments/assets/bee96601-f53e-42d8-bf7f-962503aacdcc)
 ![image](https://github.com/user-attachments/assets/e1843fab-df14-4409-bf17-48434b33379d)
+![image](https://github.com/user-attachments/assets/d579d6c8-b20a-4359-9ee7-99ffe42965cb)
 
 
 
