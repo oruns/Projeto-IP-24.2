@@ -29,6 +29,9 @@ clone o repositório do github ou faça o download do arquivo zip,
 e execute o menu.py.
 
 Sistema funcionando
+![image](https://github.com/user-attachments/assets/bee96601-f53e-42d8-bf7f-962503aacdcc)
+![image](https://github.com/user-attachments/assets/e1843fab-df14-4409-bf17-48434b33379d)
+
 
 
 
